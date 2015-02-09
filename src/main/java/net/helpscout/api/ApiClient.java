@@ -37,16 +37,13 @@ public class ApiClient {
 
 	private ApiClient() {
 	}
+	
+	private static class ApiClientHolder {
+		private static final ApiClient INSTANCE = new ApiClient();
+	}
 
-	public synchronized static ApiClient getInstance() {
-		if (instance == null) {
-			synchronized (BASE_URL) {
-				if (instance == null) {
-					instance = new ApiClient();
-				}
-			}
-		}
-		return instance;
+	public static ApiClient getInstance() {
+		return ApiClientHolder.INSTANCE;
 	}
 
 	public void setKey(String apiKey) {
